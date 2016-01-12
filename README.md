@@ -1,23 +1,21 @@
 ### Security Group Checker
 
-<p>
 This Python script checks your AWS security groups in all regions for "open" (i.e. 0.0.0.0/0) statements and reports the results.
 
-<b>Requirements:</b>
-<ul>
- <li> Tested w/ python version 2.7 / boto version 2.34
- <li> A valid profile in ~/.aws/config or ${AWS_CONFIG_FILE} with the appropriate API keys
-</ul>
+**Requirements:**
 
-<b>Usage:</b>
-<p>
-<code>
-sg-chkr.py --profile \<profile_name\>
-</code>
+* Tested w/ python version 2.7 / boto version 2.34
+* A valid profile in `~/.aws/config` or `${AWS_CONFIG_FILE}` with the appropriate API keys
 
-<b>Output:</b>
-<p>
-<pre>
+**Usage:**
+
+```
+sg-chkr.py --profile <profile_name>
+```
+
+**Output:**
+
+```
 ./sg-chkr.py --profile eng
 
 Region: us-east-1
@@ -75,9 +73,6 @@ Number of SGs: 1
 
 Region: eu-central-1
 Number of SGs: 1 
-</pre>
+```
 
-<b>To Do:</b>
-<ul>
- <li> ...
-</ul>
+**To Do:**
