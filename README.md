@@ -1,78 +1,132 @@
-### Security Group Checker
+### Scan AWS VPC Security Groups
 
-This Python script checks your AWS security groups in all regions for "open" (i.e. 0.0.0.0/0) statements and reports the results.
+This Python script checks your AWS VPC security groups in all regions for rule violations.
 
 **Requirements:**
 
-* Tested w/ python version 2.7 / boto version 2.34
-* A valid profile in `~/.aws/config` or `${AWS_CONFIG_FILE}` with the appropriate API keys
+* Tested with:
+   * Python version: 3.7.0
+   * Boto3 version: 1.7.50
+   * Botocore version: 1.10.50
+* Valid AWS API keys/profile
+
+**Setup:**
+
+Update with your AWS profile / credentials.
+
+```
+  main(profile = '<YOUR_PROFILE>')
+```
+
+Modify the following violation lists as needed.
+
+```
+  port_list = [ 'tcp-22',
+                'tcp-23',
+                'tcp-3389'
+              ]
+
+  cidr_list = [
+                '0.0.0.0/0',
+                '::/0'
+              ]
+```
 
 **Usage:**
 
 ```
-sg-chkr.py --profile <profile_name>
+python sg-chkr.py
 ```
 
 **Output:**
 
 ```
-./sg-chkr.py --profile eng
+Region: ap-south-1
+No security groups to check.
 
-Region: us-east-1
-Number of SGs: 29 
+Region: eu-west-3
+Checking 1 security group(s) in VPC vpc-1237c97b..
 
-WARNING: Open security group >>> launch-wizard-1 ( sg-6b72f506 )
-Proto: tcp 	Ports: 22 	 22 	Source: [0.0.0.0/0] 
 
-WARNING: Open security group >>> launch-wizard-2 ( sg-5ff54632 )
-Proto: tcp 	Ports: 0 	 65535 	Source: [0.0.0.0/0] 
+Region: eu-west-2
+Checking 3 security group(s) in VPC vpc-da886bb3..
 
-WARNING: Open security group >>> launch-wizard-3 ( sg-6b4b230f )
-Proto: tcp 	Ports: 22 	 22 	Source: [0.0.0.0/0] 
+Violation: security group >>> admin-test ( sg-1f1ce276 )
+proto: tcp	 from port: 22	 to port: 22	 source: 0.0.0.0/0
 
-WARNING: Open security group >>> app-server ( sg-9b505afe )
-Proto: tcp 	Ports: 8080 	 8080 	Source: [0.0.0.0/0] 
-
-WARNING: Open security group >>> rds-launch-wizard ( sg-5062e234 )
-Proto: tcp 	Ports: 3306 	 3306 	Source: [0.0.0.0/0] 
+Violation: security group >>> admin-test ( sg-1f1ce276 )
+proto: tcp	 from port: 3389	 to port: 3389	 source: 0.0.0.0/0
 
 
 Region: eu-west-1
-Number of SGs: 7 
+Checking 1 security group(s) in VPC vpc-5972943c..
 
+
+Region: ap-northeast-2
+No security groups to check.
 
 Region: ap-northeast-1
-Number of SGs: 1 
-
-
-Region: us-west-1
-Number of SGs: 1 
-
-
-Region: us-west-2
-Number of SGs: 6 
-
-WARNING: Open security group >>> launch-wizard-1 ( sg-5dfde938 )
-Proto: tcp 	Ports: 22 	 22 	Source: [0.0.0.0/0] 
-
-WARNING: Open security group >>> gateway-elb ( sg-85111ae0 )
-Proto: tcp 	Ports: 80 	 80 	Source: [0.0.0.0/0] 
-
-
-Region: ap-southeast-1
-Number of SGs: 1 
-
-
-Region: ap-southeast-2
-Number of SGs: 1 
+Checking 2 security group(s) in VPC vpc-370b1155..
 
 
 Region: sa-east-1
-Number of SGs: 1 
+No security groups to check.
 
+Region: ca-central-1
+No security groups to check.
+
+Region: ap-southeast-1
+No security groups to check.
+
+Region: ap-southeast-2
+No security groups to check.
 
 Region: eu-central-1
-Number of SGs: 1 
+Checking 4 security group(s) in VPC vpc-6a56b303..
+
+Violation: security group >>> admin-ssh ( sg-21525149 )
+proto: tcp	 from port: 22	 to port: 22	 source: 0.0.0.0/0
+
+
+Region: us-east-1
+Checking 3 security group(s) in VPC vpc-6f84ce0b..
+
+Checking 15 security group(s) in VPC vpc-344c8c51..
+
+Violation: security group >>> admin-ssh ( sg-c1351ab4 )
+proto: tcp	 from port: 22	 to port: 22	 source: 0.0.0.0/0
+
+Violation: security group >>> admin-ssh ( sg-c1351ab4 )
+proto: tcp	 from port: 22	 to port: 22	 source: ::/0
+
+Checking 4 security group(s) in VPC vpc-06328d7e..
+
+Checking 3 security group(s) in VPC vpc-3ea30558..
+
+
+Region: us-east-2
+Checking 1 security group(s) in VPC vpc-ef1d6b87..
+
+
+Region: us-west-1
+Checking 3 security group(s) in VPC vpc-eb302889..
+
+
+Region: us-west-2
+Checking 7 security group(s) in VPC vpc-0fe01276..
+
+Violation: security group >>> admin-all ( sg-03535473 )
+proto: all	 from port: all	 to port: all	 source: 0.0.0.0/0
+
+Violation: security group >>> admin-all ( sg-03535473 )
+proto: all	 from port: all	 to port: all	 source: ::/0
+
+Checking 17 security group(s) in VPC vpc-655db300..
+
+Violation: security group >>> admin-all-tcp ( sg-e68dce98 )
+proto: tcp	 from port: 0	 to port: 65535	 source: 0.0.0.0/0
+
+Violation: security group >>> admin-all-tcp ( sg-e68dce98 )
+proto: tcp	 from port: 0	 to port: 65535	 source: ::/0
 ```
 
-**To Do:**
