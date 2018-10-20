@@ -35,7 +35,7 @@ cidr_list = [
 **Usage:**
 
 ```
-python sg-chkr.py
+python security-group-scan.py
 ```
 
 **Output:**
