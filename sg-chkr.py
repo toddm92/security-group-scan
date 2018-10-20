@@ -163,5 +163,5 @@ def main(profile):
 
 if __name__ == "__main__":
 
-  main(profile = 'charlie')
+  main(profile = '<YOUR_PROFILE>')
 
