@@ -41,29 +41,11 @@ python security-group-scan.py
 **Output:**
 
 ```
-Region: eu-west-3
-Checking 2 security group(s) in VPC vpc-1237c97b..
-
-
-Region: eu-west-2
-Checking 3 security group(s) in VPC vpc-da886bb3..
-
-Violation: security group >>> admin-test ( sg-1f1ce276 )
-proto: tcp	 from port: 22	 to port: 22	 source: 0.0.0.0/0
-
-Violation: security group >>> admin-test ( sg-1f1ce276 )
-proto: tcp	 from port: 3389	 to port: 3389	 source: 0.0.0.0/0
-
-
-Region: eu-west-1
-Checking 2 security group(s) in VPC vpc-5972943c..
-
-
 Region: ap-northeast-2
 No security groups to check.
 
 Region: ap-northeast-1
-Checking 2 security group(s) in VPC vpc-370b1155..
+Checking 3 security group(s) in VPC vpc-370b1155..
 
 
 Region: us-east-1
@@ -83,8 +65,7 @@ Checking 2 security group(s) in VPC vpc-ef1d6b87..
 
 
 Region: us-west-1
-Checking 3 security group(s) in VPC vpc-eb302889..
-
+No security groups to check.
 
 Region: us-west-2
 Checking 7 security group(s) in VPC vpc-0fe01276..
