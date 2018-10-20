@@ -106,3 +106,7 @@ proto: tcp	 from port: 0	 to port: 65535	 source: ::/0
 ...
 ```
 
+**References:**
+
+* https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html
+
