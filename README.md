@@ -51,10 +51,10 @@ Checking 3 security group(s) in VPC vpc-370b1155..
 Region: us-east-1
 Checking 15 security group(s) in VPC vpc-344c8c51..
 
-**Violation:** security group >>> admin-ssh ( sg-c1351ab4 )
+Violation: security group >>> admin-ssh ( sg-c1351ab4 )
 proto: tcp	 from port: 22	 to port: 22	 source: 0.0.0.0/0
 
-**Violation:** security group >>> admin-ssh ( sg-c1351ab4 )
+Violation: security group >>> admin-ssh ( sg-c1351ab4 )
 proto: tcp	 from port: 22	 to port: 22	 source: ::/0
 
 Checking 4 security group(s) in VPC vpc-06328d7e..
@@ -70,18 +70,18 @@ No security groups to check.
 Region: us-west-2
 Checking 7 security group(s) in VPC vpc-0fe01276..
 
-**Violation:** security group >>> admin-all ( sg-03535473 )
+Violation: security group >>> admin-all ( sg-03535473 )
 proto: all	 from port: all	 to port: all	 source: 0.0.0.0/0
 
-**Violation:** security group >>> admin-all ( sg-03535473 )
+Violation: security group >>> admin-all ( sg-03535473 )
 proto: all	 from port: all	 to port: all	 source: ::/0
 
 Checking 10 security group(s) in VPC vpc-655db300..
 
-**Violation:** security group >>> admin-all-tcp ( sg-e68dce98 )
+Violation: security group >>> admin-all-tcp ( sg-e68dce98 )
 proto: tcp	 from port: 0	 to port: 65535	 source: 0.0.0.0/0
 
-**Violation:** security group >>> admin-all-tcp ( sg-e68dce98 )
+Violation: security group >>> admin-all-tcp ( sg-e68dce98 )
 proto: tcp	 from port: 0	 to port: 65535	 source: ::/0
 
 ...
