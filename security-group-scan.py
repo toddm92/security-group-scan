@@ -63,7 +63,7 @@ def scan_groups(ec2, vpc_id):
         from_port   = ip_perm['FromPort']
         to_port     = ip_perm['ToPort']
 
-      ip_ranges   = []
+      ip_ranges = []
 
       # IPv4 source IP ranges
 
@@ -116,26 +116,7 @@ def get_vpcs(ec2):
   return vpc_ids
 
 
-def get_regions(ec2):
-  """
-  Return all AWS regions
-  """
-
-  regions = []
-
-  try:
-    aws_regions = ec2.describe_regions()['Regions']
-  except ClientError as e:
-    print(e.response['Error']['Message'])
-
-  else:
-    for region in aws_regions:
-      regions.append(region['RegionName'])
-
-  return regions
-
-
-def main(profile):
+def main(profile, region):
   """
   Do the work..
   """
@@ -144,30 +125,19 @@ def main(profile):
   # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html
 
   session = boto3.Session(profile_name=profile)
-  ec2 = session.client('ec2', region_name='us-east-1')
+  ec2 = session.client('ec2', region_name=region)
 
-  regions = get_regions(ec2)
+  vpc_ids = get_vpcs(ec2)
 
-  for region in regions:
-    print('\nRegion: {}'.format(region))
+  # Checks..
 
-    ec2 = session.client('ec2', region_name=region)
-
-    vpc_ids = get_vpcs(ec2)
-
-    if len(vpc_ids) <= 0:
-      print('No security groups to check.')
-      continue
-
-    # Checks..
-
-    for vpc_id in vpc_ids:
-      result = scan_groups(ec2, vpc_id)
+  for vpc_id in vpc_ids:
+    result = scan_groups(ec2, vpc_id)
 
   return
 
 
 if __name__ == "__main__":
 
-  main(profile = '<YOUR_PROFILE>')
+  main(profile = '<YOUR_PROFILE>', region = 'us-west-2')
 
